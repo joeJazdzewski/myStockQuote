@@ -1,0 +1,16 @@
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\bin\Debug\myStockQuote.dll
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\bin\Debug\myStockQuote.pdb
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\bin\Debug\myStockQuote.dll.mdb
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\bin\Debug\Teamsource.Teamsource.apk
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\bin\Debug\Teamsource.Teamsource-Signed.apk
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\obj\Debug\myStockQuote.dll
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\obj\Debug\myStockQuote.pdb
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\obj\Debug\android\bin\Teamsource.Teamsource.apk
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\obj\Debug\res\layout\main.xml
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\obj\Debug\res\values\strings.xml
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\obj\Debug\res\drawable\icon.png
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\obj\Debug\res\layout\historypage.xml
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\obj\Debug\res\layout\quotepopup.xml
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\obj\Debug\res\layout\searchresultslayout.xml
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\obj\Debug\R.cs.flag
+C:\Users\Joseph\Documents\Projects\myStockQuote\myStockQuote\obj\Debug\uploadflags.txt
