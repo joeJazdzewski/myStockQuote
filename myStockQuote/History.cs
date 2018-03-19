@@ -29,10 +29,10 @@ namespace myStockQuote
 			TextView title = (TextView)FindViewById (Resource.Id.HisTitle);
 			title.SetAllCaps (true);
 			if (sym != "") {
-				myQuote.setSym (sym);
+				myQuote.setSymbol (sym);
 				myQuote.getStockInformation ();
-				if (myQuote.companyName != "") {
-					title.Text = myQuote.companyName;
+				if (myQuote.CompanyName != "") {
+					title.Text = myQuote.CompanyName;
 					myListView = (ListView)FindViewById (Resource.Id.HisList);
 					myListView.Adapter = new ArrayAdapter (this, Android.Resource.Layout.SimpleListItem1, myhistory.date);
 					myListView.TextAlignment = TextAlignment.Center;

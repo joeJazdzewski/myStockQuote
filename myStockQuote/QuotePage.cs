@@ -18,42 +18,35 @@ namespace myStockQuote
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.QuotePopUp);
-			TextView Title = (TextView) FindViewById (Resource.Id.QuoteTitle);
-			TextView Price = (TextView) FindViewById (Resource.Id.QuotePrice);
-			TextView Date = (TextView)FindViewById (Resource.Id.QuoteDate);
-			TextView EarningsPerShare = (TextView)FindViewById (Resource.Id.QuoteEarnings);
-			TextView NetChange = (TextView)FindViewById (Resource.Id.QuoteNet);
-			TextView Dividends = (TextView)FindViewById (Resource.Id.QuoteDividend);
-			TextView MrktCap = FindViewById<TextView> (Resource.Id.QuoteMktCap);
-			TextView OutstandingShares = FindViewById<TextView> (Resource.Id.QuoteOutstandingShares);
-			Button getHistory = FindViewById<Button> (Resource.Id.btnQpageGetHistory);
+			
+			Button getHistory = FindViewById<Button>(Resource.Id.btnQpageGetHistory);
 
-			Quote Con = new Quote();
-			string sym = Intent.GetStringExtra ("symbol") ?? "";
-			Con.setSym(sym);
-			Con.getStockInformation();
+			Quote quote = new Quote();
+			string symbol = Intent.GetStringExtra("symbol") ?? "";
+            quote.setSymbol(symbol);
+            quote.getStockInformation();
 
 			getHistory.Click += (object sender, EventArgs e) => {
 				var tentSearch = new Intent(this, typeof(History));
-				tentSearch.PutExtra("symbol", sym);
+				tentSearch.PutExtra("symbol", symbol);
 				StartActivity(tentSearch);
 			};
 
-			if (Con.companyName != "" && Con.price != "")
+			if (!string.IsNullOrWhiteSpace(quote.CompanyName) && !string.IsNullOrWhiteSpace(quote.Price))
 			{
-				Title.Text = Con.companyName; 
-				Price.Text ="$" + Con.price;
-				Date.Text =  Con.date;
-				EarningsPerShare.Text = Con.earningsPerShare;
-				NetChange.Text =  Con.NetChange;
-				Dividends.Text = "$" + Con.Dividend;
-				MrktCap.Text = Con.MarketCap;
-				OutstandingShares.Text = Con.OutstandingShares;
+                FindViewById<TextView>(Resource.Id.QuoteTitle).Text = quote.CompanyName; 
+				FindViewById<TextView>(Resource.Id.QuotePrice).Text = "$" + quote.Price;
+                FindViewById<TextView>(Resource.Id.QuoteDate).Text = quote.Date;
+                FindViewById<TextView>(Resource.Id.QuoteEarnings).Text = quote.EarningsPerShare;
+                FindViewById<TextView>(Resource.Id.QuoteNet).Text = quote.NetChange;
+                FindViewById<TextView>(Resource.Id.QuoteDividend).Text = "$" + quote.Dividend;
+                FindViewById<TextView>(Resource.Id.QuoteMktCap).Text = quote.MarketCap;
+                FindViewById<TextView>(Resource.Id.QuoteOutstandingShares).Text = quote.OutstandingShares;
 			}
 			else 
 			{
 				var tentSearch = new Intent(this, typeof(SearchResults));
-				tentSearch.PutExtra("symbol", sym);
+				tentSearch.PutExtra("symbol", symbol);
 				StartActivity(tentSearch);
 			}
 		}

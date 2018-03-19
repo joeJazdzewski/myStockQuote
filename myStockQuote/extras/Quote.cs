@@ -9,36 +9,38 @@ namespace myStockQuote
 {
 	public class Quote
 	{
-		private string Stocksymbol { get; set; }
-		public string companyName { get; set; }
-		public string price { get; set; }
-		public string date { get; set; }
-		public string earningsPerShare { get; set; }
+		private string _stocksymbol { get; set; }
+
+		public string CompanyName { get; set; }
+		public string Price { get; set; }
+		public string Date { get; set; }
+		public string EarningsPerShare { get; set; }
 		public string NetChange { get; set; }
 		public string Dividend { get; set; }
 		public string OutstandingShares { get; set; }
 		public string MarketCap{ get; set;}
 
-		public Quote ()
-		{
-			Stocksymbol = "";
-			companyName = "";
-			price = "0.00";
-			date = "01/01/0001";
-			earningsPerShare = "0.00";
-			NetChange = "0.00";
-			Dividend = "0.00";
-			OutstandingShares = "0";
-			MarketCap = "0";
+        public Quote(string symbol = "")
+        {
+            _stocksymbol = symbol;
+            CompanyName = "";
+            Price = "0.00";
+            Date = "01/01/0001";
+            EarningsPerShare = "0.00";
+            NetChange = "0.00";
+            Dividend = "0.00";
+            OutstandingShares = "0";
+            MarketCap = "0";
+        }
 
-		}
-		public void setSym(string Symbol)
+        public void setSymbol(string symbol)
 		{
-			Stocksymbol = Symbol;
+			_stocksymbol = symbol;
 		}
+
 		public bool getStockInformation()
 		{
-			string symbol = Stocksymbol;
+			string symbol = _stocksymbol;
 			var request = HttpWebRequest.Create(string.Format(@"http://jazdzewskij.cs.spu.edu/requestQuote.php?sym={0}", symbol));//http://jazdzewskij.cs.spu.edu/requestQuote.php?sym=msft
 			request.ContentType = "application/json";
 			request.Method = "GET";
@@ -56,33 +58,29 @@ namespace myStockQuote
 					Assert.NotNull (content);
 					try
 					{
-						//Result 
 						string Result = (content.ToString());
 						var obj = JsonObject.Parse(Result);
 						if (obj.Count > 0)
 						{
-							companyName = obj["symName"];
-							Stocksymbol = obj["symSymbol"];
-							price = obj["qLastSalePrice"];
-							date = obj["qQuoteDateTime"];
-							earningsPerShare = obj["qNetChangePrice"];
+							CompanyName = obj["symName"];
+							_stocksymbol = obj["symSymbol"];
+							Price = obj["qLastSalePrice"];
+							Date = obj["qQuoteDateTime"];
+							EarningsPerShare = obj["qNetChangePrice"];
 							NetChange = obj["qNetChangePrice"];
 							Dividend = obj["qCashDividendAmount"];
 							OutstandingShares = obj["qTotalOutstandingSharesQty"];
 							MarketCap = obj["symMarketCap"];
-
 						}
 						else
 						{
 							return false;
 						}
 						return true;
-						//output.Text = obj["symName"] + "'s stock price today is $" + obj["qLastSalePrice"];
 					}
 					catch(Exception)
 					{
 						return false;
-						//output.Text = "Stock was not found";
 					}
 				}
 			}

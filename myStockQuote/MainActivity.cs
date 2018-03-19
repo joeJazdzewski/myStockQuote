@@ -16,48 +16,52 @@ namespace myStockQuote
 	[Activity (Label = "Financial Stock Exchange", MainLauncher = true)]
 	public class MainActivity : Activity
 	{
-		protected override void OnCreate (Bundle bundle)
+		protected override void OnCreate(Bundle bundle)
 		{
-			base.OnCreate (bundle);
+			base.OnCreate(bundle);
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
-			// Get our button from the layout resource,
-			// and attach an event to it
-			Button button = FindViewById<Button> (Resource.Id.btnGetQuote);
-			Button btnHistory = FindViewById<Button> (Resource.Id.btnGetHistory);
-			Button btnSearch = FindViewById<Button> (Resource.Id.btnSearchStocks);
-			TextView output = FindViewById<TextView> (Resource.Id.sQuote);
-			EditText input = FindViewById<EditText> (Resource.Id.search);
-
-			button.Click += (sender, e) => {
-				if ( input.Text != "")
+            #region QuoteButton
+            Button getQuotebutton = FindViewById<Button>(Resource.Id.btnGetQuote);
+            getQuotebutton.Click += (sender, e) => 
+            {
+                EditText search = FindViewById<EditText>(Resource.Id.search);
+                if (!string.IsNullOrWhiteSpace(search.Text))
 				{
 					var tentQuote = new Intent(this, typeof(QuotePage));
-					tentQuote.PutExtra("symbol", input.Text);
+					tentQuote.PutExtra("symbol", search.Text);
 					StartActivity(tentQuote);
 				}
 			};
-
-			btnHistory.Click += (sender, e) => {
-				if(input.Text != "")
+            #endregion
+            #region History Button
+            Button getHistoryButton = FindViewById<Button>(Resource.Id.btnGetHistory);
+            getHistoryButton.Click += (sender, e) => 
+            {
+                EditText search = FindViewById<EditText>(Resource.Id.search);
+                if (!string.IsNullOrWhiteSpace(search.Text))
 				{
 					var tentHistory = new Intent(this, typeof(History));
-					tentHistory.PutExtra("symbol", input.Text);
+					tentHistory.PutExtra("symbol", search.Text);
 					StartActivity(tentHistory);
 				}
 			};
-
-			btnSearch.Click += (sender, e) => {
-				if(input.Text != "")
+            #endregion
+            #region Search Button
+            Button searchButton = FindViewById<Button>(Resource.Id.btnSearchStocks);
+            searchButton.Click += (sender, e) => 
+            {
+                EditText search = FindViewById<EditText>(Resource.Id.search);
+                if (!string.IsNullOrWhiteSpace(search.Text))
 				{
 					var tentSearch = new Intent(this, typeof(SearchResults));
-					tentSearch.PutExtra("symbol", input.Text);
+					tentSearch.PutExtra("symbol", search.Text);
 					StartActivity(tentSearch);
 				}
 			};
-
-		}
-	}
+            #endregion
+        }
+    }
 }

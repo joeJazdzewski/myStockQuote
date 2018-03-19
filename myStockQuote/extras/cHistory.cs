@@ -41,8 +41,8 @@ namespace myStockQuote
 						Console.Out.WriteLine ("Response Body: \r\n {0}", content);
 					}
 					Assert.NotNull (content);
-					try {
-						//Result 
+					try
+                    {
 						string Result = (content.ToString ());
 						var arr = JsonArray.Parse (Result);
 						if (arr.Count > 0) {
@@ -56,9 +56,10 @@ namespace myStockQuote
 							return false;
 						}
 						return true;
-					} catch (Exception) {
+					}
+                    catch (Exception)
+                    {
 						return false;
-						//output.Text = "Stock was not found";
 					}
 				}
 			}

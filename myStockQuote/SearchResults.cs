@@ -14,31 +14,35 @@ namespace myStockQuote
 	[Activity (Label = "SearchResults")]			
 	public class SearchResults : Activity
 	{
-		ListView Results;
-		TextView Message;
-		SearchStocks con = new SearchStocks (); 
+		SearchStocks searchStocks = new SearchStocks (); 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.SearchResultsLayout);
-			string sym = Intent.GetStringExtra ("symbol") ?? "";
-			con.setSearchString (sym);
-			con.getStockInformation ();
-			Message = FindViewById<TextView> (Resource.Id.SearchMessage);
-			if (con.CompanySym.Count != 0) {
-				Results = (ListView)FindViewById (Resource.Id.SearchList);
-				Message.SetHeight (0);
-				Results.Adapter = new ArrayAdapter (this, Android.Resource.Layout.SimpleListItem1, con.CompanyName);
-				Results.ItemClick += (sender, e) => {
+
+			string symbol = Intent.GetStringExtra ("symbol") ?? "";
+			searchStocks.setSearchString (symbol);
+			searchStocks.getStockInformation ();
+
+            TextView message = FindViewById<TextView> (Resource.Id.SearchMessage);
+
+            if (searchStocks.CompanySymbol.Count != 0)
+            {
+                message.SetHeight(0);
+                ListView results = FindViewById<ListView>(Resource.Id.SearchList);
+				results.Adapter = new ArrayAdapter (this, Android.Resource.Layout.SimpleListItem1, searchStocks.CompanyName);
+
+                results.ItemClick += (sender, e) => 
+                {
 					var tentQuote = new Intent (this, typeof(QuotePage));
-					tentQuote.PutExtra ("symbol", con.CompanySym.ToArray () [e.Position]);
+					tentQuote.PutExtra ("symbol", searchStocks.CompanySymbol.ToArray()[e.Position]);
 					StartActivity (tentQuote);
 				};
-			} else {
-				Message.Text = "No Results Found";
 			}
-
+            else
+            {
+				message.Text = "No Results Found";
+			}
 		}
 	}
 }
-
